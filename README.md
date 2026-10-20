@@ -1,0 +1,267 @@
+> **Looking for the official Claude Code guide?** See [Anthropic's Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code/overview).
+> This is a community plugin to help you proactively master Claude Code.
+
+# Claude Code Guide 🌿
+
+<img width="1236" height="380" alt="image" src="https://github.com/user-attachments/assets/1b8117a7-47cf-406b-a2f3-91243879945f" />
+
+
+A Claude Code Guide — interactive onboarding and Q&A on setup, best practices, automation, and effective workflows, packaged as a plugin.
+Designed with love for beginners 🌱 to experts. 🌳
+
+**Platforms:** Tested on **Windows** (Git Bash), **macOS**, and **Linux** (Ubuntu).
+
+**New!** Enable a proactive learning with **Game Mode**!  
+Enable with `/guide:game-mode on`
+
+> **Listen to this guide** — [NotebookLM audio overview](https://notebooklm.google.com/notebook/61c00692-3e07-4cac-887a-3360520d8f94) provides an AI-generated audio reflection of the guide content.
+>
+> **Featured on** — [AI Tool Review](https://aitoolreview.ai/guides/) lists this guide among its curated Claude Code resources.
+
+*⭐ Find this useful? Star the repo to follow updates and show support!* <a href="https://github.com/OriNachum/claude-code-guide/stargazers"><img src="https://img.shields.io/github/stars/OriNachum/claude-code-guide?style=social" alt="GitHub stars"></a>
+
+<p align="center">
+  <img width="384" height="256" alt="image" src="https://github.com/user-attachments/assets/5330f813-6539-4e15-bb94-0e1994edd94c" />
+</p>
+
+## Install as a Claude Code Plugin
+
+This repo is a **Claude Code plugin**. Install it to get interactive guide skills directly inside Claude Code.
+
+> **Requires Claude Code v1.0.33 or later.** Run `claude --version` to check. See [setup docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code) to install or update.
+
+### Install from GitHub (recommended)
+
+From within Claude Code:
+
+```shell
+/plugin marketplace add OriNachum/claude-code-guide
+/plugin install guide@claude-code-guide
+```
+
+Or from the CLI:
+
+```bash
+claude plugin marketplace add OriNachum/claude-code-guide
+claude plugin install guide@claude-code-guide
+```
+
+> The plugin name is `guide` and the marketplace name is `claude-code-guide` (from `marketplace.json`), so the install target is `guide@claude-code-guide`.
+
+> After installing, restart Claude Code or run `/reload-plugins` for the plugin skills to become available.
+
+### Updating
+
+```shell
+/plugin update guide@claude-code-guide
+```
+
+### Other installation methods
+
+<details>
+<summary>Try without installing (session only)</summary>
+
+```bash
+git clone https://github.com/OriNachum/claude-code-guide.git
+claude --plugin-dir ./claude-code-guide
+```
+
+Loads the plugin for the current session only. No restart needed.
+
+</details>
+
+<details>
+<summary>Install from a local clone</summary>
+
+```shell
+/plugin marketplace add ./claude-code-guide
+/plugin install guide@claude-code-guide
+```
+
+Or from the CLI:
+
+```bash
+claude plugin marketplace add ./claude-code-guide
+claude plugin install guide@claude-code-guide
+```
+
+</details>
+
+### Usage
+
+Once installed, seven skills are available:
+
+- **`/guide:onboard`** — Interactive getting-started walkthrough. Guides you through environment setup, your first session, and best practices.
+- **`/guide:ask`** — Ask any question about Claude Code features. Reads relevant reference docs to give accurate, detailed answers.
+- **`/guide:introspect`** — Introspective Development. Audit your project's lifecycle coverage, find gaps in tooling and docs, and auto-fix what it finds. Run after a task to ask "How could I have done it better?"
+- **`/guide:game-mode`** — Enable Game Mode. The guide locally tracks your usage of Claude, assigns a level per feature area, and helps you master Claude Code.
+- **`/guide:level-up`** — Feature roadmap and personalized next-step coaching. Shows what to learn next based on your current skill level.
+- **`/guide:migrate-to-claude`** — Migrate your Cursor, Windsurf, Copilot, Continue, Aider, Cody, or Codex configs to Claude Code. Discovers configs, trims bloat, and proposes a clean migration plan.
+- **`/guide:visualize-setup`** — Interactive dashboard of all installed skills, MCP servers, and setup configuration.
+
+#### Level up
+
+<img width="1050" alt="image" src="https://github.com/user-attachments/assets/5e47db03-511d-469c-a258-e42022360988" />
+
+
+#### VIsualize setup
+
+<img width="1231" height="1300" alt="image" src="https://github.com/user-attachments/assets/527000c6-486f-49e8-aea9-afdec13a0cc6" />
+
+<img width="1231" height="707" alt="image" src="https://github.com/user-attachments/assets/c8d2b970-5baf-4d5f-9084-f0bbd94a6d21" />
+
+
+### Hooks in action
+
+This plugin doubles as a **real-world hooks example**. Game Mode uses all three hook events to power its gamification system:
+
+- **PostToolUse** — tracks which Claude Code features you use ([track-usage.sh](hooks/scripts/track-usage.sh))
+- **UserPromptSubmit** — detects slash-command usage (skills, plugins, `/loop`) in your prompts ([track-prompt.sh](hooks/scripts/track-prompt.sh))
+- **Stop** — counts sessions, tracks tokens, and nudges you to try new features at Fibonacci intervals ([track-stop.sh](hooks/scripts/track-stop.sh))
+
+See [hooks.json](hooks/hooks.json) and [hooks/scripts/](hooks/scripts/) for the full implementation.
+
+## Documentation
+
+### User Stories
+
+Learn by example — these narrative walkthroughs show Claude Code in realistic, end-to-end scenarios where multiple features come together. Each story follows a developer through a real workflow, so you can see how the pieces fit.
+
+- [Daily Workflow](skills/ask/references/daily-workflow.md) — A typical day using Claude Code, from morning context to end-of-day
+- [Getting Started with Claude Code](skills/ask/references/starting-new-repo.md) — Your first days on an existing team — /init, building skills organically
+- [New Project in Existing Repo](skills/ask/references/new-project-existing-repo.md) — Adding a new module/service within an existing codebase
+- [Auto-Maintain CLAUDE.md](skills/ask/references/auto-maintain-claude-md.md) — GitHub Actions cron job to keep CLAUDE.md fresh weekly
+- [Context Management](skills/ask/references/context-management-and-clear.md) — When to use /clear, /compact, and how to manage context
+- [Sub Agents in a Monolith](skills/ask/references/sub-agents-in-monolith.md) — Using sub agents to navigate and work within a large monolith
+- [Discovering Plugins](skills/ask/references/discovering-plugins.md) — Browsing marketplaces, evaluating, and installing your first plugins
+- [Memory in Practice](skills/ask/references/memory-in-practice.md) — How auto memory works — corrections that stick, promoting to CLAUDE.md
+- [Automated Briefings](skills/ask/references/automated-briefings.md) — Production monitoring with /loop — deploys, post-deploy validation, on-call triage
+- [Migrating from Other AI Tools](skills/ask/references/migrating-from-other-tools.md) — Moving from Cursor, Windsurf, Copilot, Codex — what maps where, what to trim
+
+### Getting Started
+
+- [Setting Your Environment](skills/ask/references/beginner/setting-your-environment.md) — CLAUDE.md, permissions, model selection, MCP servers, customization
+- [Starting to Work](skills/ask/references/beginner/starting-to-work.md) — Permission modes, Plan Mode, Accept Edits, the explore-plan-implement workflow
+- [Choosing Your Model](skills/ask/references/beginner/choosing-your-model.md) — Fable 5, Opus 4.8, Sonnet 4.6, Haiku, effort levels, when to use each
+- [Best Practices](skills/ask/references/intermediate/best-practices.md) — Self-testing loops, context management, effective prompting, common failure patterns
+- [Auto Memory](skills/ask/references/beginner/memory.md) — How Claude remembers across sessions, comparison with CLAUDE.md
+
+### Automation
+
+- [Automating Your Workflows](skills/ask/references/intermediate/automating-your-workflows.md) — Overview of the three automation mechanisms: Hooks, Skills, Sub Agents
+- [Hooks](skills/ask/references/intermediate/hooks.md) — Lifecycle event automation — triggers, handlers, matchers, common patterns
+- [Hooks HTTP](skills/ask/references/expert/hooks-http.md) — HTTP-based hook patterns and integrations
+- [Skills](skills/ask/references/intermediate/skills.md) — Creating reusable prompt workflows as Markdown skill files
+- [Sub Agents](skills/ask/references/expert/sub-agents.md) — Specialist agent delegation with scoped permissions, worktree isolation
+- [Agent Teams](skills/ask/references/expert/team-mode.md) — ⚠️ Experimental: coordinated multi-agent sessions with shared task lists
+
+### Configuration & Extensions
+
+- [Configuring Your Claude](skills/ask/references/intermediate/configuring-your-claude.md) — Ongoing configuration — when to build skills, agents, hooks, and how they evolve
+- [Plugins](skills/ask/references/intermediate/plugins.md) — Installing, creating, and sharing Claude Code plugins
+- [Marketplace](skills/ask/references/intermediate/marketplace.md) — Discovering, browsing, evaluating, publishing, and managing plugin marketplaces
+- [Plugin Examples](skills/ask/references/intermediate/plugin-examples.md) — Curated showcase of notable plugins with patterns and install instructions
+- [MCP](skills/ask/references/intermediate/mcp.md) — MCP (Model Context Protocol) — when to use it, the restaurant analogy, server setup and scopes
+- [Built-ins](skills/ask/references/beginner/built-ins.md) — Built-in slash commands, bundled skills, hook events, sub agents, and tools
+- [Ongoing Work](skills/ask/references/expert/ongoing-work.md) — Managing long-running tasks, resuming work, and session continuity
+
+### Integrations
+
+- [Claude Agent SDK](skills/ask/references/expert/agent-sdk.md) — TypeScript and Python SDKs for programmatic Claude Code integration
+- [GitHub Actions](skills/ask/references/intermediate/github-actions.md) — Running Claude Code in CI/CD pipelines with GitHub Actions
+
+### Platform Support
+
+- [Windows Support](docs/windows-support.md) — Setup, jq installation, and Windows-specific adjustments
+
+### Other
+
+- [Loop](skills/ask/references/intermediate/loop.md) — Running recurring tasks with /loop — polling, deploy monitoring, on-call triage
+
+## Repository structure
+
+```text
+claude-code-guide/
+├── .claude-plugin/
+│   ├── plugin.json ........................ Plugin manifest (name: "guide", version, metadata)
+│   └── marketplace.json .................. Marketplace manifest
+├── .github/
+│   └── workflows/
+│       └── tests.yml ...................... Bash test suite (bats-core)
+├── _includes/
+│   ├── footer_custom.html ................. Disclaimer footer
+│   └── head_custom.html ................... .md twin <link rel=alternate> header
+├── _plugins/
+│   └── llm_markdown.rb .................... Build-time generator: .md twin per page + llms-full.txt
+├── _sass/
+│   └── color_schemes/
+│       └── anthropic.scss ................. Anthropic cream color scheme
+├── hooks/
+│   ├── hooks.json ......................... Hook event configuration (PostToolUse, UserPromptSubmit, Stop)
+│   └── scripts/
+│       ├── track-usage.sh ................. PostToolUse handler — tracks feature usage
+│       ├── track-prompt.sh ................ UserPromptSubmit handler — tracks slash-command usage
+│       ├── track-stop.sh .................. Stop handler — token tracking, session counting, and Fibonacci nudges
+│       └── migrate-data.sh ................ Lightweight schema migration on version upgrade
+├── skills/
+│   ├── onboard/
+│   │   └── SKILL.md ...................... Interactive getting-started walkthrough
+│   ├── ask/
+│   │   ├── SKILL.md ...................... Q&A against reference docs
+│   │   └── references/ ................... Reference docs organized by tier
+│   │           ├── beginner/ ............. 🌱 Beginner feature docs (5 files)
+│   │           ├── intermediate/ ......... 🌿 Intermediate feature docs (11 files)
+│   │           ├── expert/ ............... 🌳 Expert feature docs (5 files)
+│   │           └── *.md .................. Story walkthroughs (10 files)
+│   ├── game-mode/
+│   │   └── SKILL.md ...................... Gamified usage tracker with levels
+│   ├── level-up/
+│   │   └── SKILL.md ...................... Feature roadmap and coaching hints
+│   ├── migrate-to-claude/
+│   │   └── SKILL.md ...................... AI tool config migration assistant
+│   └── visualize-setup/
+│       └── SKILL.md ...................... Interactive HTML setup dashboard generator
+├── agents/
+│   ├── doc-verifier.md .................... On-demand reference doc accuracy verifier (Sonnet agent)
+│   ├── pr-review.md ....................... Pull request review sub-agent (Sonnet agent)
+│   └── version-bump.md .................... Synced version bumper for plugin.json + marketplace.json (Haiku agent)
+├── tests/
+│   ├── helpers/
+│   │   └── setup.sh ...................... Common test fixtures and mock data
+│   ├── track-usage.bats .................. Tests for PostToolUse hook
+│   ├── track-prompt.bats ................. Tests for UserPromptSubmit hook
+│   ├── track-stop.bats ................... Tests for Stop hook (Fibonacci, levels, scoring)
+│   └── migrate-data.bats ................. Tests for schema migration
+├── docs/
+│   ├── getting-started.md ................. Nav parent: Getting Started
+│   ├── automation.md ...................... Nav parent: Automation
+│   ├── configuration.md ................... Nav parent: Configuration & Extensions
+│   ├── integrations.md .................... Nav parent: Integrations
+│   ├── user-stories.md .................... Nav parent: User Stories
+│   └── windows-support.md ................ Windows setup and adjustments
+├── _config.yml ............................ Jekyll configuration (just-the-docs theme; include: _worker.js/_redirects)
+├── _worker.js ............................. Cloudflare Pages advanced-mode Worker (markdown content negotiation)
+├── _redirects ............................. Cloudflare Pages rules (catch-all real 404)
+├── 404.md ................................. Custom 404 page (served by _redirects)
+├── llms.txt ............................... Agent-facing documentation index
+├── Gemfile ................................ Ruby dependencies
+├── index.md ............................... Website landing page
+├── .local/ ................................ Runtime data (gitignored)
+│   └── game-data.json .................... Usage data (created at runtime)
+├── CLAUDE.md .............................. Agent instructions
+├── PRIVACY.md ............................. Privacy policy
+├── LICENSE ................................ CC BY 4.0
+└── README.md .............................. This file
+```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=OriNachum/claude-code-guide&type=Date)](https://www.star-history.com/#OriNachum/claude-code-guide&Date)
+
+## Contributing
+
+Contributions welcome! The seven skills live at `skills/onboard/`, `skills/ask/`, `skills/introspect/`, `skills/game-mode/`, `skills/level-up/`, `skills/migrate-to-claude/`, and `skills/visualize-setup/`. Reference docs are in `skills/ask/references/` and hooks are in `hooks/`.
+
+## License
+
+CC BY 4.0 — see [LICENSE](LICENSE) for details.

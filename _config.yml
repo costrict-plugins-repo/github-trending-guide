@@ -1,0 +1,73 @@
+# _config.yml
+title: Claude Code Guide
+description: >-
+  Community guide to Claude Code — setup, best practices, automation,
+  and effective workflows.
+baseurl: ""
+url: "https://claude-code-guide.org"
+
+theme: just-the-docs
+color_scheme: anthropic
+
+search_enabled: true
+search:
+  button: true
+
+aux_links:
+  "GitHub":
+    - "https://github.com/OriNachum/claude-code-guide"
+aux_links_new_tab: true
+
+footer_content: >-
+  Claude and Claude Code are products of Anthropic, PBC. This guide is a
+  community project and is not affiliated with or endorsed by Anthropic.
+  Licensed under <a href="https://github.com/OriNachum/claude-code-guide/blob/main/LICENSE">CC BY 4.0</a>.
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-relative-links
+  - jekyll-sitemap
+
+# Add Google Site Verification
+webmaster_verifications:
+  google: SAWMasZ1hKCZm8hnk0xFUgqnFYYPgdrKG8jKuTJa6a0
+
+# jekyll-relative-links converts .md links to HTML permalinks during build
+relative_links:
+  enabled: true
+  collections: false
+
+# Force-copy underscore-prefixed Cloudflare Pages control files into the build
+# root. Jekyll excludes underscore files by default; `include:` overrides that.
+#   _worker.js  — Pages consumes it as the advanced-mode Worker (markdown
+#                 content negotiation), not as a static asset.
+#   _redirects  — Pages redirect/rewrite rules; a catch-all that serves
+#                 /404.html with a 404 status for unmatched paths.
+include:
+  - _worker.js
+  - _redirects
+
+# Apply just-the-docs default layout to all pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude non-site files from build
+exclude:
+  - hooks/
+  - .claude-plugin/
+  - CLAUDE.md
+  - PRIVACY.md
+  - LICENSE
+  - .local/
+  - skills/onboard/
+  - skills/game-mode/
+  - skills/level-up/
+  - skills/ask/SKILL.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - .github/
